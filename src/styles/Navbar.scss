@@ -1,0 +1,26 @@
+@import "partials/variables";
+@import "partials/mixins";
+@import "partials/utils";
+
+.Navbar {
+  width: 100%;
+  padding: 10px 0;
+  background-color: $white-color;
+  box-shadow: $box-shadow-1;
+  nav {
+    @include flexbox(space-between, center, row);
+    @extend %container;
+    .user-details {
+      @include flexbox(center, center, row);
+      .sign-out-btn {
+        @include button-colors($white-color, $primary-color);
+        @extend %btn-styles;
+        margin-left: 10px;
+        transition: $transition;
+        &:hover {
+          background-color: $black-color;
+        }
+      }
+    }
+  }
+}

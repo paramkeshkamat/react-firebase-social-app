@@ -1,0 +1,27 @@
+@import "partials/variables";
+@import "partials/mixins";
+@import "partials/utils";
+
+.Login {
+  @extend %container;
+  height: 100vh;
+  @include flexbox(space-between, center, row);
+
+  .svg-container {
+    width: 30vw;
+    img {
+      width: 100%;
+    }
+  }
+
+  .sign-in-form {
+    .sign-in-btn {
+      @include button-colors($white-color, $primary-color);
+      @extend %btn-styles;
+      transition: $transition;
+      &:hover {
+        background-color: $black-color;
+      }
+    }
+  }
+}

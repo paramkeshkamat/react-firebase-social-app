@@ -1,0 +1,18 @@
+%btn-styles {
+  cursor: pointer;
+  outline: none;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+}
+
+%grid-center {
+  display: grid;
+  place-items: center;
+}
+
+%container {
+  width: 95vw;
+  max-width: 998px;
+  margin: auto;
+}

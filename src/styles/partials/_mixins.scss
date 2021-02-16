@@ -1,0 +1,11 @@
+@mixin flexbox($justify-content, $align-items, $flex-direction) {
+  display: flex;
+  justify-content: $justify-content;
+  align-items: $align-items;
+  flex-direction: $flex-direction;
+}
+
+@mixin button-colors($color, $background-color) {
+  color: $color;
+  background-color: $background-color;
+}
