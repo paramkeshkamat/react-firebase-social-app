@@ -4,8 +4,12 @@
 
 .ImageUpload {
   @extend %container;
-  max-width: 350px;
-  margin-top: 20px;
+  max-width: 400px;
+  margin-top: 40px;
+  margin-bottom: 50px;
+  padding: 10px;
+  background-color: $white-color;
+  box-shadow: $box-shadow-1;
 
   progress {
     position: fixed;
@@ -26,5 +30,40 @@
   }
   progress::-moz-progress-bar {
     background-color: $primary-color !important;
+  }
+
+  h2 {
+    font-size: 18px;
+    margin-bottom: 5px;
+    font-weight: 500;
+  }
+
+  textarea {
+    width: 100%;
+    resize: none;
+    height: 70px;
+    outline: none;
+    border: none;
+    font-size: 16px;
+  }
+
+  .upload {
+    @include flexbox(space-between, center, row);
+
+    .input-file {
+      svg {
+        cursor: pointer;
+      }
+     
+    }
+
+    .upload-btn {
+      @extend %btn-styles;
+      @include button-colors($white-color, $primary-color);
+      transition: $transition;
+      &:hover {
+        background-color: $black-color;
+      }
+    }
   }
 }

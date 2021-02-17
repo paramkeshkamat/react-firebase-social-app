@@ -3,6 +3,7 @@ import { AuthContext } from "../context/authContext";
 import firebase from "firebase/app";
 import { db, storage } from "../firebase";
 import { v4 as uuid } from "uuid";
+import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
 import "../styles/ImageUpload.scss";
 
 const ImageUpload = () => {
@@ -36,12 +37,13 @@ const ImageUpload = () => {
           .getDownloadURL()
           .then((url) => {
             const id = uuid();
-            db.collection("posts").doc().set({
+            db.collection("posts").doc(id).set({
               id,
               image: url,
               caption,
               username: currentUser.displayName,
               profileImage: currentUser.photoURL,
+              likes: 0,
               created: firebase.firestore.FieldValue.serverTimestamp(),
             });
           })
@@ -57,14 +59,23 @@ const ImageUpload = () => {
   return (
     <div className="ImageUpload">
       {progress ? <progress value={progress} max={100} /> : null}
-      <input
-        type="text"
-        placeholder="Caption..."
+      <h2>Create a post</h2>
+      <textarea
+        placeholder="Add a caption..."
         value={caption}
         onChange={(e) => setCaption(e.target.value)}
       />
-      <input type="file" onChange={handleChange} />
-      <button onClick={handleUpload}>Upload</button>
+      <div className="upload">
+        <div className="input-file">
+          <label>
+            <PhotoCameraIcon />
+            <input type="file" onChange={handleChange} hidden />
+          </label>
+        </div>
+        <button onClick={handleUpload} className="upload-btn">
+          Upload
+        </button>
+      </div>
     </div>
   );
 };

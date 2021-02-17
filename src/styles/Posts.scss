@@ -1,0 +1,55 @@
+@import "partials/variables";
+@import "partials/mixins";
+@import "partials/utils";
+
+.Post {
+  @extend %container;
+  max-width: 400px;
+  background-color: $white-color;
+  margin-bottom: 30px;
+  box-shadow: $box-shadow-2;
+
+  .post-header {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    padding: 10px;
+    h2 {
+      font-size: 20px;
+      align-self: center;
+      margin-left: 10px;
+      font-weight: 500;
+    }
+    .delete-post-btn {
+      @extend %btn-styles;
+      @extend %grid-center;
+      align-self: center;
+      padding: 0;
+      background-color: transparent;
+    }
+  }
+
+  img {
+    width: 100%;
+    object-fit: contain;
+  }
+
+  .post-footer {
+    padding: 5px 10px 10px 10px;
+    .likes {
+      display: flex;
+      font-size: 18px;
+      margin-bottom: 5px;
+      .like {
+        @extend %btn-styles;
+        @extend %grid-center;
+        padding: 0;
+        background-color: transparent;
+      }
+    }
+    .caption {
+      strong {
+        font-weight: 600;
+      }
+    }
+  }
+}
