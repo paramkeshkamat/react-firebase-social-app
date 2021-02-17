@@ -1,5 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../context/authContext";
+import AddComment from "./AddComment";
+import Comment from "./Comment";
 import { db } from "../firebase";
 import { Avatar } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -27,13 +29,16 @@ const Post = (props) => {
   };
 
   useEffect(() => {
-    db.collection("posts")
+    const unsubscribe = db
+      .collection("posts")
       .doc(id)
       .collection("comments")
+      .orderBy("addedOn", "asc")
       .onSnapshot((snapshot) => {
         setComments(snapshot.docs.map((doc) => doc.data()));
       });
-  });
+    return () => unsubscribe();
+  }, [id]);
 
   return (
     <div className="Post">
@@ -58,15 +63,11 @@ const Post = (props) => {
           <strong>{username}</strong>&nbsp;
           {caption}
         </p>
-        {comments.map((data) => {
-          return (
-            <p>
-              <strong>{data.username}</strong>
-              {data.comment}
-            </p>
-          );
-        })}
+        {comments.map((comment, index) => (
+          <Comment key={index} id={id} picUploader={username} {...comment} />
+        ))}
       </div>
+      <AddComment id={id} />
     </div>
   );
 };

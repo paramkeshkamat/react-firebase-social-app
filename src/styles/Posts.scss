@@ -4,6 +4,7 @@
 
 .Post {
   @extend %container;
+  width: 100%;
   max-width: 400px;
   background-color: $white-color;
   margin-bottom: 30px;
@@ -50,6 +51,49 @@
       strong {
         font-weight: 600;
       }
+    }
+    .comment {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      padding: 2px 0;
+      & > * {
+        align-self: center;
+      }
+      strong {
+        font-weight: 500;
+      }
+      .delete-comment-btn {
+        @extend %btn-styles;
+        @extend %grid-center;
+        background: transparent;
+        padding: 0;
+        svg {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+
+  .AddComment {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+
+    input {
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      outline: none;
+    }
+    .post-btn {
+      background-color: transparent;
+      border: none;
+      outline: none;
+      padding: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      //   color: $primary-color;
     }
   }
 }
