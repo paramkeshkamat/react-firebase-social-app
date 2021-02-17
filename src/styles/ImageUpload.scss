@@ -52,6 +52,11 @@
     @include flexbox(space-between, center, row);
 
     .input-file {
+      @include flexbox(center, center, row);
+      p {
+        margin-bottom: 5px;
+        margin-left: 5px;
+      }
       svg {
         cursor: pointer;
       }

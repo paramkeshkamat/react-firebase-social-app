@@ -19,8 +19,12 @@ const App = () => {
           <Route exact path="/">
             {currentUser ? <Home /> : <Redirect to="/login" />}
           </Route>
-          <Route exact path="/login" component={Login} />
-          <Route path="*" component={ErrorPage} />
+          <Route exact path="/login">
+            <Login />
+          </Route>
+          <Route path="*">
+            <ErrorPage />
+          </Route>
         </Switch>
       </Router>
     </div>

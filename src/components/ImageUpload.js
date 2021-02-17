@@ -43,7 +43,7 @@ const ImageUpload = () => {
               caption,
               username: currentUser.displayName,
               profileImage: currentUser.photoURL,
-              likes: 0,
+              likes: [],
               created: firebase.firestore.FieldValue.serverTimestamp(),
             });
           })
@@ -71,6 +71,7 @@ const ImageUpload = () => {
             <PhotoCameraIcon />
             <input type="file" onChange={handleChange} hidden />
           </label>
+          {image && <p>{image.name}</p>}
         </div>
         <button onClick={handleUpload} className="upload-btn">
           Upload

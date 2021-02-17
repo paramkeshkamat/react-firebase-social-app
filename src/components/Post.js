@@ -11,7 +11,13 @@ import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 const Post = (props) => {
   const { id, image, caption, username, likes, profileImage } = props;
   const { currentUser } = useContext(AuthContext);
-  const [isLiked, setIsLiked] = useState(false);
+  const [isLiked, setIsLiked] = useState(() => {
+    if (likes.includes(currentUser.displayName)) {
+      return true;
+    } else {
+      return false;
+    }
+  });
   const [comments, setComments] = useState([]);
 
   const deletePost = () => {
@@ -20,11 +26,19 @@ const Post = (props) => {
 
   const handleLike = () => {
     setIsLiked(!isLiked);
+    let likedBy = [];
+
+    if (!likes.includes(currentUser.displayName)) {
+      likedBy = [...likes, currentUser.displayName];
+    } else {
+      likedBy = likes.filter((user) => user !== currentUser.displayName);
+    }
+    
     db.collection("posts")
       .doc(id)
       .update({
         ...props,
-        likes: !isLiked ? likes + 1 : likes - 1,
+        likes: likedBy,
       });
   };
 
@@ -57,7 +71,7 @@ const Post = (props) => {
           <button className="like" onClick={handleLike}>
             {isLiked ? <ThumbUpIcon /> : <ThumbUpOutlinedIcon />}
           </button>
-          &nbsp;{likes}
+          &nbsp;{likes.length}
         </div>
         <p className="caption">
           <strong>{username}</strong>&nbsp;
