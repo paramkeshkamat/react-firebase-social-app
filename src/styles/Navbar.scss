@@ -14,6 +14,13 @@
   nav {
     @include flexbox(space-between, center, row);
     @extend %container;
+    .logo-container {
+      @include flexbox(center, center, row);
+      img {
+        width: 45px;
+        margin-right: 5px;
+      }
+    }
     .user-details {
       @include flexbox(center, center, row);
       .sign-out-btn {

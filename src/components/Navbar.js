@@ -19,7 +19,10 @@ const Navbar = () => {
   return (
     <div className="Navbar">
       <nav>
-        <h1>React Social</h1>
+        <div class="logo-container">
+          <img src="/logo.png" alt="logo" />
+          <h1>React Social</h1>
+        </div>
         <div className="user-details">
           {currentUser ? <Avatar src={currentUser.photoURL} /> : <Avatar />}
           <button className="sign-out-btn" onClick={() => auth.signOut()}>
