@@ -19,7 +19,7 @@ const Navbar = () => {
   return (
     <div className="Navbar">
       <nav>
-        <div class="logo-container">
+        <div className="logo-container">
           <img src="/logo.png" alt="logo" />
           <h1>React Social</h1>
         </div>

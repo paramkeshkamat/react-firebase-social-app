@@ -16,14 +16,15 @@ const Home = () => {
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", () => {
+    const scrollTop = () => {
       if (window.scrollY > 100) {
         setShowScrollToTop(true);
       } else {
         setShowScrollToTop(false);
       }
-    });
-    return () => window.removeEventListener("scroll");
+    };
+    window.addEventListener("scroll", scrollTop);
+    return () => window.removeEventListener("scroll", scrollTop);
   }, []);
 
   if (!currentUser) {

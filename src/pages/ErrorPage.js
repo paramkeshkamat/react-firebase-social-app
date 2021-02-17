@@ -1,9 +1,17 @@
+import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import pageNotFound from "../assets/pageNotFound.svg";
 import "../styles/ErrorPage.scss";
 
 const ErrorPage = () => {
   const history = useHistory();
+
+  useEffect(() => {
+    const error = setTimeout(() => {
+      history.push("/");
+    }, 8000);
+    return () => clearTimeout(error, 8000);
+  }, [history]);
 
   return (
     <div className="ErrorPage">

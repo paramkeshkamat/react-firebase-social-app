@@ -5,23 +5,58 @@
 .Login {
   @extend %container;
   height: 100vh;
+  max-width: 888px;
   @include flexbox(space-between, center, row);
 
   .svg-container {
-    width: 30vw;
+    width: 400px;
     img {
       width: 100%;
     }
   }
 
   .sign-in-form {
+    @include flexbox(center, center, column);
+    width: 90vw;
+    max-width: 300px;
+    background-color: $white-color;
+    padding: 20px 15px;
+    border-radius: 10px;
+    box-shadow: $box-shadow-1;
+    img {
+      width: 100px;
+    }
+    h2 {
+      margin-bottom: 60px;
+    }
     .sign-in-btn {
       @include button-colors($white-color, $primary-color);
       @extend %btn-styles;
+      @include flexbox(center, center, row);
       transition: $transition;
+      width: 180px;
       &:hover {
         background-color: $black-color;
       }
+      svg {
+        font-size: 16px;
+      }
+    }
+    .facebook-btn {
+      @include button-colors($white-color, $secondary-color);
+      margin-top: 10px;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .Login {
+    .svg-container {
+      display: none;
+    }
+    .sign-in-form {
+      width: 90vw;
+      margin: auto;
     }
   }
 }
