@@ -33,7 +33,7 @@ const Post = (props) => {
     } else {
       likedBy = likes.filter((user) => user !== currentUser.displayName);
     }
-    
+
     db.collection("posts")
       .doc(id)
       .update({

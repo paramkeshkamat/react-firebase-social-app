@@ -1,3 +1,6 @@
+@import "partials/variables";
+@import "partials/utils";
+
 * {
   padding: 0;
   margin: 0;
@@ -6,6 +9,39 @@
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
+:root {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: #eee;
+}
+
+.scrollToTop {
+  @extend %btn-styles;
+  @extend %grid-center;
+  position: fixed;
+  right: 5%;
+  bottom: 5%;
+  padding: 5px;
+  border-radius: 50%;
+  transition: $transition;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  svg {
+    font-size: 40px;
+  }
+}
+
+.hide-btn {
+  display: none;
+}
+
+@media (max-width: 576px) {
+  .scrollToTop {
+    svg {
+      font-size: 30px;
+    }
+  }
 }

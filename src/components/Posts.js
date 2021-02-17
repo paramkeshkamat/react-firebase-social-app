@@ -7,11 +7,13 @@ const Posts = () => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    db.collection("posts")
+    const unsubscribe = db
+      .collection("posts")
       .orderBy("created", "desc")
       .onSnapshot((snapshot) => {
         setPosts(snapshot.docs.map((doc) => doc.data()));
       });
+    return () => unsubscribe();
   }, []);
 
   return (

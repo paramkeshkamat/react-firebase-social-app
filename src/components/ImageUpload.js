@@ -69,7 +69,12 @@ const ImageUpload = () => {
         <div className="input-file">
           <label>
             <PhotoCameraIcon />
-            <input type="file" onChange={handleChange} hidden />
+            <input
+              type="file"
+              onChange={handleChange}
+              accept="image/*"
+              hidden
+            />
           </label>
           {image && <p>{image.name}</p>}
         </div>
