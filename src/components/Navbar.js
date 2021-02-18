@@ -1,20 +1,11 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../context/authContext";
 import { auth } from "../firebase";
-import { useHistory } from "react-router-dom";
 import { Avatar } from "@material-ui/core";
 import "../styles/Navbar.scss";
 
 const Navbar = () => {
   const { currentUser } = useContext(AuthContext);
-  const history = useHistory();
-
-  useEffect(() => {
-    const redirect = setTimeout(() => {
-      history.push("/");
-    }, 8000);
-    return () => clearTimeout(redirect, 8000);
-  });
 
   return (
     <div className="Navbar">

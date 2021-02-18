@@ -7,11 +7,11 @@ const ErrorPage = () => {
   const history = useHistory();
 
   useEffect(() => {
-    const error = setTimeout(() => {
+    const redirect = setTimeout(() => {
       history.push("/");
     }, 8000);
-    return () => clearTimeout(error, 8000);
-  }, [history]);
+    return () => clearTimeout(redirect, 8000);
+  });
 
   return (
     <div className="ErrorPage">
