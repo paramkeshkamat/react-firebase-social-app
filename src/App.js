@@ -1,10 +1,5 @@
 import { useContext } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import ErrorPage from "./pages/ErrorPage";
@@ -20,7 +15,7 @@ const App = () => {
             {currentUser ? <Home /> : <Redirect to="/login" />}
           </Route>
           <Route exact path="/login">
-            <Login />
+            {!currentUser ? <Login /> : <Redirect to="/" />}
           </Route>
           <Route path="*">
             <ErrorPage />

@@ -1,14 +1,10 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import ImageUpload from "../components/ImageUpload";
 import Posts from "../components/Posts";
-import { AuthContext } from "../context/authContext";
-import { useHistory } from "react-router-dom";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 
 const Home = () => {
-  const { currentUser } = useContext(AuthContext);
-  const history = useHistory();
   const [showScrollToTop, setShowScrollToTop] = useState(false);
 
   const scrollTop = () => {
@@ -26,10 +22,6 @@ const Home = () => {
     window.addEventListener("scroll", scrollTop);
     return () => window.removeEventListener("scroll", scrollTop);
   }, []);
-
-  if (!currentUser) {
-    history.push("/login");
-  }
 
   return (
     <div>

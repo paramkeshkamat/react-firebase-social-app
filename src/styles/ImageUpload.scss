@@ -48,6 +48,18 @@
     font-size: 16px;
   }
 
+  .upload-error {
+    color: red;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-weight: 500;
+    svg {
+      font-size: 20px;
+    }
+  }
+
   .upload {
     @include flexbox(space-between, center, row);
 

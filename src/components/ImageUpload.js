@@ -1,9 +1,10 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/authContext";
 import firebase from "firebase/app";
 import { db, storage } from "../firebase";
 import { v4 as uuid } from "uuid";
 import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
+import { BiError } from "react-icons/bi";
 import "../styles/ImageUpload.scss";
 
 const ImageUpload = () => {
@@ -11,6 +12,7 @@ const ImageUpload = () => {
   const [progress, setProgress] = useState(0);
   const [caption, setCaption] = useState("");
   const [image, setImage] = useState(null);
+  const [uploadError, setUploadError] = useState(false);
 
   const handleChange = (e) => {
     if (e.target.files[0]) {
@@ -19,8 +21,12 @@ const ImageUpload = () => {
   };
 
   const handleUpload = () => {
-    const uploadTask = storage.ref(`images/${image.name}`).put(image);
+    if (!image) {
+      setUploadError(true);
+      return;
+    }
 
+    const uploadTask = storage.ref(`images/${image.name}`).put(image);
     uploadTask.on(
       "state_changed",
       (snapshot) => {
@@ -56,6 +62,13 @@ const ImageUpload = () => {
     );
   };
 
+  useEffect(() => {
+    const error = setTimeout(() => {
+      setUploadError(false);
+    }, 3000);
+    return () => clearTimeout(error, 3000);
+  }, [uploadError]);
+
   return (
     <div className="ImageUpload">
       {progress ? <progress value={progress} max={100} /> : null}
@@ -65,6 +78,12 @@ const ImageUpload = () => {
         value={caption}
         onChange={(e) => setCaption(e.target.value)}
       />
+      {uploadError && (
+        <p className="upload-error">
+          <BiError />
+          &nbsp;Please select an image
+        </p>
+      )}
       <div className="upload">
         <div className="input-file">
           <label>
