@@ -48,15 +48,46 @@
       }
     }
     .caption {
+      display: grid;
+      grid-template-columns: 1fr auto;
+
       strong {
         font-weight: 600;
+      }
+      p {
+        word-break: break-all;
+        margin-right: 15px;
+        padding-bottom: 5px;
+        margin-bottom: 5px;
+        input {
+          border: none;
+          outline: none;
+          width: 70%;
+          font-size: 16px;
+          flex: 1;
+        }
+      }
+
+      .edit-caption-btn {
+        @extend %btn-styles;
+        @extend %grid-center;
+        background-color: transparent;
+        padding: 0;
+        margin: 0;
+        svg {
+          font-size: 18px;
+        }
       }
     }
     .comment {
       display: grid;
       grid-template-columns: 1fr auto;
       padding: 2px 0;
-      & > * {
+      word-break: break-all;
+      p {
+        margin-right: 15px;
+      }
+      width & > * {
         align-self: center;
       }
       strong {

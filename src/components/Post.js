@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../context/authContext";
 import AddComment from "./AddComment";
+import Caption from "./Caption";
 import Comment from "./Comment";
 import { db } from "../firebase";
 import { Avatar } from "@material-ui/core";
@@ -11,13 +12,9 @@ import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 const Post = (props) => {
   const { id, image, caption, username, likes, profileImage } = props;
   const { currentUser } = useContext(AuthContext);
-  const [isLiked, setIsLiked] = useState(() => {
-    if (likes.includes(currentUser.displayName)) {
-      return true;
-    } else {
-      return false;
-    }
-  });
+  const [isLiked, setIsLiked] = useState(() =>
+    likes.includes(currentUser.displayName) ? true : false
+  );
   const [comments, setComments] = useState([]);
 
   const deletePost = () => {
@@ -73,10 +70,7 @@ const Post = (props) => {
           </button>
           &nbsp;{likes.length}
         </div>
-        <p className="caption">
-          <strong>{username}</strong>&nbsp;
-          {caption}
-        </p>
+        {caption && <Caption {...props}/>}
         {comments.map((comment, index) => (
           <Comment key={index} id={id} picUploader={username} {...comment} />
         ))}

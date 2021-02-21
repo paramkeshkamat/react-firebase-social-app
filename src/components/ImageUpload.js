@@ -71,7 +71,7 @@ const ImageUpload = () => {
 
   return (
     <div className="ImageUpload">
-      {progress ? <progress value={progress} max={100} /> : null}
+      <progress value={progress} max={100} />
       <h2>Create a post</h2>
       <textarea
         placeholder="Add a caption..."
