@@ -5,6 +5,7 @@ import AddComment from "./AddComment";
 import Caption from "./Caption";
 import Comment from "./Comment";
 import { Avatar, Tooltip } from "@material-ui/core";
+import { IoChevronDown, IoChevronUp } from "react-icons/io5";
 import DeleteIcon from "@material-ui/icons/Delete";
 import ThumbUpOutlinedIcon from "@material-ui/icons/ThumbUpOutlined";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
@@ -16,6 +17,7 @@ const Post = (props) => {
   const [isLiked, setIsLiked] = useState(() =>
     likes.includes(currentUser.displayName) ? true : false
   );
+  const [showAllComments, setShowAllComments] = useState(false);
 
   const deletePost = () => {
     db.collection("posts")
@@ -57,7 +59,7 @@ const Post = (props) => {
       .collection("posts")
       .doc(id)
       .collection("comments")
-      .orderBy("addedOn", "asc")
+      .orderBy("addedOn", "desc")
       .onSnapshot((snapshot) => {
         setComments(snapshot.docs.map((doc) => doc.data()));
       });
@@ -86,9 +88,50 @@ const Post = (props) => {
           &nbsp;{likes.length}
         </div>
         {caption && <Caption {...props} />}
-        {comments.map((comment, index) => (
-          <Comment key={index} id={id} picUploader={username} {...comment} />
-        ))}
+        {comments.length > 3 && (
+          <div
+            className="show-comments"
+            onClick={() => setShowAllComments(!showAllComments)}
+          >
+            {showAllComments ? (
+              <p>
+                show less&nbsp;
+                <IoChevronUp />
+              </p>
+            ) : (
+              <p>
+                show all comments&nbsp;
+                <IoChevronDown />
+              </p>
+            )}
+          </div>
+        )}
+        <div className="comments-container">
+          {comments.map((comment, index) => {
+            if (!showAllComments) {
+              while (index < 3) {
+                return (
+                  <Comment
+                    key={index}
+                    id={id}
+                    picUploader={username}
+                    {...comment}
+                  />
+                );
+              }
+            } else {
+              return (
+                <Comment
+                  key={index}
+                  id={id}
+                  picUploader={username}
+                  {...comment}
+                />
+              );
+            }
+            return true;
+          })}
+        </div>
       </div>
       <AddComment id={id} />
     </div>

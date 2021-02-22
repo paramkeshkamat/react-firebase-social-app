@@ -5,7 +5,7 @@
 .Post {
   @extend %container;
   width: 100%;
-  max-width: 400px;
+  max-width: 450px;
   background-color: $white-color;
   margin-bottom: 30px;
   box-shadow: $box-shadow-2;
@@ -79,6 +79,19 @@
         }
       }
     }
+
+    .show-comments {
+      color: grey;
+      cursor: pointer;
+      p {
+        display: flex;
+        align-items: center;
+        svg {
+          font-size: 18px;
+        }
+      }
+    }
+
     .comment {
       display: grid;
       grid-template-columns: 1fr auto;
