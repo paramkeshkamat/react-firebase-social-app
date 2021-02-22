@@ -35,3 +35,14 @@
     }
   }
 }
+
+@media (max-width: 340px) {
+  h1 {
+    font-size: 20px;
+  }
+  .user-details {
+    .sign-out-btn {
+      font-size: 14px;
+    }
+  }
+}

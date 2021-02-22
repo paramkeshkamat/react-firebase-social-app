@@ -3,8 +3,8 @@ import { AuthContext } from "../context/authContext";
 import firebase from "firebase/app";
 import { db, storage } from "../firebase";
 import { v4 as uuid } from "uuid";
-import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
 import { BiError } from "react-icons/bi";
+import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
 import "../styles/ImageUpload.scss";
 
 const ImageUpload = () => {

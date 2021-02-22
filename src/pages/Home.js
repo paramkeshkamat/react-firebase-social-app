@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import ImageUpload from "../components/ImageUpload";
 import Posts from "../components/Posts";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 
 const Home = () => {
   const [showScrollToTop, setShowScrollToTop] = useState(false);
@@ -32,7 +33,7 @@ const Home = () => {
         className={`scrollToTop ${!showScrollToTop && "hide-btn"}`}
         onClick={scrollTop}
       >
-        <ArrowUpwardIcon />
+        <KeyboardArrowUpIcon />
       </button>
     </div>
   );

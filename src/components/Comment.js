@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { AuthContext } from "../context/authContext";
 import { db } from "../firebase";
+import { Tooltip } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 
 const Comment = ({ id, commentId, username, comment, picUploader }) => {
@@ -29,7 +30,9 @@ const Comment = ({ id, commentId, username, comment, picUploader }) => {
         (currentUser.displayName === username ||
           currentUser.displayName === picUploader) && (
           <button className="delete-comment-btn" onClick={deleteComment}>
-            <DeleteIcon />
+            <Tooltip title="Delete comment" placement="right" arrow>
+              <DeleteIcon />
+            </Tooltip>
           </button>
         )}
     </div>

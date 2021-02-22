@@ -1,6 +1,7 @@
 import { useState, useContext, useRef, useEffect } from "react";
 import { AuthContext } from "../context/authContext";
 import { db } from "../firebase";
+import { Tooltip } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import DoneIcon from "@material-ui/icons/Done";
 
@@ -55,7 +56,9 @@ const Caption = (props) => {
           {isCaptionEditing ? (
             <DoneIcon onClick={updateCaption} />
           ) : (
-            <EditIcon />
+            <Tooltip title="Edit caption" placement="right" arrow>
+              <EditIcon />
+            </Tooltip>
           )}
         </button>
       )}

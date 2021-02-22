@@ -4,7 +4,7 @@ import AddComment from "./AddComment";
 import Caption from "./Caption";
 import Comment from "./Comment";
 import { db } from "../firebase";
-import { Avatar } from "@material-ui/core";
+import { Avatar, Tooltip } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import ThumbUpOutlinedIcon from "@material-ui/icons/ThumbUpOutlined";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
@@ -58,7 +58,9 @@ const Post = (props) => {
         <h2>{username}</h2>
         {currentUser.displayName === username && (
           <button className="delete-post-btn" onClick={deletePost}>
-            <DeleteIcon />
+            <Tooltip title="Delete post" placement="right" arrow>
+              <DeleteIcon />
+            </Tooltip>
           </button>
         )}
       </div>
@@ -70,7 +72,7 @@ const Post = (props) => {
           </button>
           &nbsp;{likes.length}
         </div>
-        {caption && <Caption {...props}/>}
+        {caption && <Caption {...props} />}
         {comments.map((comment, index) => (
           <Comment key={index} id={id} picUploader={username} {...comment} />
         ))}
