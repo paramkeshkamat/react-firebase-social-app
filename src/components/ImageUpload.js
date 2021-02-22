@@ -3,6 +3,7 @@ import { AuthContext } from "../context/authContext";
 import firebase from "firebase/app";
 import { db, storage } from "../firebase";
 import { v4 as uuid } from "uuid";
+import { Tooltip } from "@material-ui/core";
 import { BiError } from "react-icons/bi";
 import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
 import "../styles/ImageUpload.scss";
@@ -54,7 +55,6 @@ const ImageUpload = () => {
             });
           })
           .catch((err) => console.log(err.message));
-
         setProgress(0);
         setCaption("");
         setImage(null);
@@ -87,7 +87,9 @@ const ImageUpload = () => {
       <div className="upload">
         <div className="input-file">
           <label>
-            <PhotoCameraIcon />
+            <Tooltip title="Select Image" placement="bottom" arrow>
+              <PhotoCameraIcon />
+            </Tooltip>
             <input
               type="file"
               onChange={handleChange}

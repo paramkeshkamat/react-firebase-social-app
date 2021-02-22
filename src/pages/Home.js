@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import ImageUpload from "../components/ImageUpload";
 import Posts from "../components/Posts";
-import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 
 const Home = () => {

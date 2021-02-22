@@ -1,9 +1,9 @@
 import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../context/authContext";
+import { db } from "../firebase";
 import AddComment from "./AddComment";
 import Caption from "./Caption";
 import Comment from "./Comment";
-import { db } from "../firebase";
 import { Avatar, Tooltip } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import ThumbUpOutlinedIcon from "@material-ui/icons/ThumbUpOutlined";
@@ -12,12 +12,25 @@ import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 const Post = (props) => {
   const { id, image, caption, username, likes, profileImage } = props;
   const { currentUser } = useContext(AuthContext);
+  const [comments, setComments] = useState([]);
   const [isLiked, setIsLiked] = useState(() =>
     likes.includes(currentUser.displayName) ? true : false
   );
-  const [comments, setComments] = useState([]);
 
   const deletePost = () => {
+    db.collection("posts")
+      .doc(id)
+      .collection("comments")
+      .onSnapshot((snapshot) =>
+        snapshot.docs.forEach((doc) =>
+          db
+            .collection("posts")
+            .doc(id)
+            .collection("comments")
+            .doc(doc.id)
+            .delete()
+        )
+      );
     db.collection("posts").doc(id).delete();
   };
 
