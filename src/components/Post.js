@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../context/authContext";
-import { db } from "../firebase";
+import { db, storage } from "../firebase";
 import AddComment from "./AddComment";
 import Caption from "./Caption";
 import Comment from "./Comment";
@@ -9,6 +9,15 @@ import { IoChevronDown, IoChevronUp } from "react-icons/io5";
 import DeleteIcon from "@material-ui/icons/Delete";
 import ThumbUpOutlinedIcon from "@material-ui/icons/ThumbUpOutlined";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
+
+const getImageNameFromURL = (url) => {
+  const name = url
+    .split("/")[7]
+    .split("?")[0]
+    .split("%2F")[1]
+    .replace("%20", " ");
+  return name;
+};
 
 const Post = (props) => {
   const { id, image, caption, username, likes, profileImage } = props;
@@ -34,6 +43,8 @@ const Post = (props) => {
         )
       );
     db.collection("posts").doc(id).delete();
+
+    storage.ref("images").child(getImageNameFromURL(image)).delete();
   };
 
   const handleLike = () => {
@@ -59,7 +70,7 @@ const Post = (props) => {
       .collection("posts")
       .doc(id)
       .collection("comments")
-      .orderBy("addedOn", "desc")
+      .orderBy("addedOn", "asc")
       .onSnapshot((snapshot) => {
         setComments(snapshot.docs.map((doc) => doc.data()));
       });
