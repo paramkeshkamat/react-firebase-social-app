@@ -1,6 +1,6 @@
 # React Social
 \
-A mini social app using React and where firebase where user can sign in with google or facebook and upload pictures. Users can also like each others post and comment on each others post.
+A mini social media web app using React and firebase where users can sign in with google or facebook and upload pictures. Users can also like each other's posts and comment on each other's posts.
 ## screenshots:
 ### 1. Sign in page: 
 ![sign in page](https://i.ibb.co/9W701KB/react-social-signin.png)
